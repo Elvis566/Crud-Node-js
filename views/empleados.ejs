@@ -1,0 +1,54 @@
+
+<div class="card card-primary col-md-10 offset-md-1">
+
+      <h3 class="card-title">Registro de Empleado</h3>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form method="POST" action="/save">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre de empleado</label>
+          <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail3">Fecha de contratación</label>
+            <input type="date" name="fechacontratacion" class="form-control" id="exampleInputEmail3" required max="<%= new Date().toISOString().split('T')[0] %>">
+          </div>
+
+          <label for="exampleInputEmail3">Salario</label>
+          <input type="number" name="salario" class="form-control" id="exampleInputEmail3" 
+                 pattern="[0-9]+([\.,][0-9]+)?" title="Ingrese un número decimal válido" 
+                 required min="0">
+          <div class="form-group">
+            <label for="exampleInputEmail3">Horas trabajadas</label>
+            <input type="number" name="horastrabajo" class="form-control" id="exampleInputEmail3" required min="0">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail3">Departamento</label>
+            <input type="text" name="departamento" class="form-control" id="exampleInputEmail3" required>
+          </div>
+
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </div>
+    </form>
+</div>
+<!-- <div class="row mb-3">
+  <div class="col-md-10 offset-md-1">
+      <form  action="">
+          <div class="input-group">
+              <input name="buscar" type="text" class="form-control form-control-lg" placeholder="Buscar por departamento">
+              <div class="input-group-append">
+                  <button type="submit" class="btn btn-lg btn-default">
+                      <i class="fa fa-search"></i>
+                  </button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div> -->
+
