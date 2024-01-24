@@ -15,3 +15,7 @@ exports.save = (req, res)=>{
     })
 }
 
+
+exports.tareas = (req, res) =>{
+    
+}
