@@ -36,8 +36,43 @@ router.get('/create',(rep, res)=>{
    res.render('empleados');
 })
 
+router.get('/tareas',(rep, res)=>{
+    
+    let mensaje = false;
+   conexion.query('SELECT * FROM empleados', (err, resultados)=>{
+      if(err){
+         throw err
+      }else{
+         res.render('tareas', {mensaje, resultados:resultados});
+      }
+   })
+})
+
+router.get('/empleadosPagados',(rep, res)=>{
+    conexion.query(`SELECT *
+    FROM empleados
+    WHERE pagado = ${1}
+    ORDER BY fechacontratacion;`, (err, resultados) => {
+        if (err) {
+            throw err;
+        } else {
+            conexion.query(`SELECT SUM(salario) AS total FROM empleados WHERE pagado = ${1};`,(error, results)=>{
+                if (error) {
+                    throw error;
+                } else {
+                  res.render('empleadosPagados', {resultados:resultados, user:results[0]})
+                }
+            })
+           
+        }
+    });
+    
+})
+
+
 const crud = require('./controllers/crud');
 router.post('/save', crud.save);
+router.post('/saveTareas', crud.tareas);
 
 
 module.exports = router

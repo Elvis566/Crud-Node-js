@@ -1,0 +1,64 @@
+<table class="table table-striped projects col-md-10 offset-md-1 mt-4 "  >
+    <thead >
+        <tr>
+            <th style="width: 1%">
+                #
+            </th>
+            <th style="width: 20%">
+  
+  Nombre         </th>
+            <th style="width: 20%">
+                Fecha de contratacion
+            </th>
+            <th style="width: 20%">
+                salario
+            </th>
+            <th style="width: 20%">
+               horas trabajadas
+            </th>
+            <th style="width: 20%">
+                departamento
+            </th>
+
+  
+        </tr>
+    </thead>
+    <tbody>
+      <% resultados.forEach((empleados)=>{%>
+        <tr>
+            <td>
+              <%=empleados.id%>
+            </td>
+            <td>
+              <%=empleados.nombre%>
+  
+            </td>
+            <td>
+              <% const fechacontratacion = new Date(empleados.fechacontratacion); %>
+              <%= fechacontratacion.toLocaleDateString('es-ES', {day: 'numeric',month: 'numeric', year: 'numeric',   }) %>
+              
+  
+             </td>
+             <td>
+              <%=empleados.salario%>
+  
+             </td>
+             <td>
+              <%=empleados.horastrabajo%>
+  
+             </td>
+             <td>
+              <%=empleados.departamento%>
+  
+             </td>
+  
+  
+        </tr>
+  <%})%>
+  <tr>
+    <td>Salario total</td>
+    <td><%= user.total%></td>
+</tr>
+
+    </tbody>
+  </table>

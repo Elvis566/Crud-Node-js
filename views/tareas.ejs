@@ -1,33 +1,50 @@
 <div class="card card-primary col-md-10 offset-md-1">
-    <div class="card-header col-md-12">
-      <h3 class="card-title">Añadir tareas</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    <form method="POST" action="/tareasfinal">
+    <h1 class="card-title">Designar tareas a los empleados</h1>
+    <form method="POST" action="/saveTareas" >
+
       <div class="card-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Nombre de tarea</label>
-          <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" >
+          <input type="text" name="nombreTarea" class="form-control" id="exampleInputEmail1" >
         </div>
 
           <div class="form-group">
             <label for="exampleInputEmail3">Horas de tarea</label>
             <input type="number" name="horas" class="form-control" id="exampleInputEmail3"  title="Ingrese un número decimal válido">
-        </div>
+          </div>
 
 
         <label for="inputStatus">Empleado</label>
         <select name="id_empleado" id="inputStatus" class="form-control custom-select">
 
-<%resultados.forEach((empleados)=>{%>
+        <%resultados.forEach((empleados)=>{%>
             <option value="<%=empleados.id%>"><%=empleados.nombre%></option>
-<%})%>
-</select>
+        <%})%>
+        </select>
 
-<div class="card-footer">
-  <button type="submit" class="btn btn-primary">Registrar</button>
+        <div class="card-footer">
+         <button type="submit" class="btn btn-primary"><a onclick="confirmar(mensaje)">Registrar</a></button>
+        </div>
+      </div>
+    </form>
+
 </div>
-</form>
-
-      </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function confirmar(mensaje){
+    let message = mensaje;
+  if(mensaje){
+    Swal.fire({
+      icon: "success",
+      title: "Listo!",
+      text: "Se creo correctamente la tarea!",
+    });
+  }else{
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "No se puede exceder el tiempo de trabajo con tareas!",
+    });
+  }
+  }
+</script>
