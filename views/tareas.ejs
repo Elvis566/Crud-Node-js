@@ -5,17 +5,17 @@
       <div class="card-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Nombre de tarea</label>
-          <input type="text" name="nombreTarea" class="form-control" id="exampleInputEmail1" >
+          <input type="text" name="nombreTarea" required class="form-control" id="exampleInputEmail1" >
         </div>
 
           <div class="form-group">
             <label for="exampleInputEmail3">Horas de tarea</label>
-            <input type="number" name="horas" class="form-control" id="exampleInputEmail3"  title="Ingrese un número decimal válido">
+            <input type="number" name="horas" required class="form-control" id="exampleInputEmail3"  title="Ingrese un número decimal válido">
           </div>
 
 
         <label for="inputStatus">Empleado</label>
-        <select name="id_empleado" id="inputStatus" class="form-control custom-select">
+        <select name="id_empleado" required id="inputStatus" class="form-control custom-select">
 
         <%resultados.forEach((empleados)=>{%>
             <option value="<%=empleados.id%>"><%=empleados.nombre%></option>
@@ -23,7 +23,7 @@
         </select>
 
         <div class="card-footer">
-         <button type="submit" class="btn btn-primary"><a onclick="confirmar(mensaje)">Registrar</a></button>
+         <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
       </div>
     </form>
@@ -31,20 +31,12 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  function confirmar(mensaje){
-    let message = mensaje;
-  if(mensaje){
+  if(con){
     Swal.fire({
-      icon: "success",
-      title: "Listo!",
-      text: "Se creo correctamente la tarea!",
-    });
-  }else{
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "No se puede exceder el tiempo de trabajo con tareas!",
-    });
-  }
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: '<a href="#">Why do I have this issue?</a>'
+});
   }
 </script>

@@ -16,23 +16,20 @@ exports.save = (req, res)=>{
 }
 
 exports.tareas = (req, res) =>{
-    // let mensaje = 'No se pueden exceder las horas de trabajo, con las horas para cumplir tareas';
-    let mensaje = true;
     const nombreTarea = req.body.nombreTarea;
     const horasDispuestas = req.body.horas;
     const idEmpleado= req.body.id_empleado;
-
-    conexion.query('SELECT horastrabajo FROM  empleados WHERE id = ?',[idEmpleado],(error, resultados)=>{
+    const con=true;
+    conexion.query('SELECT horastrabajo FROM  empleados WHERE id = ?',[idEmpleado],(error, resultados,con)=>{
         if(error){
             console.log(error);
             res.redirect('/');
         }
 
         const horasDeTrabajo = resultados[0].horastrabajo;
-        console.log(horasDeTrabajo);
-
         if(horasDeTrabajo<horasDispuestas){
-            res.redirect('/tareas');
+            console.log(con);
+            res.redirect(`/tareas?${con}`);
         }else{
             conexion.query('INSERT INTO tareas SET?',{tarea:nombreTarea,horasdispuestas:horasDispuestas,id_empleado:idEmpleado}, (error)=>{
                 if(error){
@@ -44,7 +41,8 @@ exports.tareas = (req, res) =>{
                         console.log(error);
                     return res.redirect('/');
                     }
-                    res.render('tareas', {mensaje, resultados:results})
+
+                    res.render(`tareas`, {con, resultados:results})
                     // res.redirect('/tareas')
                 })
                 

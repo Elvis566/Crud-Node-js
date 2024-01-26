@@ -37,13 +37,16 @@ router.get('/create',(rep, res)=>{
 })
 
 router.get('/tareas',(rep, res)=>{
-    
-    let mensaje = false;
-   conexion.query('SELECT * FROM empleados', (err, resultados)=>{
+    let con =false;
+    let aux=rep.query.con;
+    if(aux){
+        con=true;
+    }
+   conexion.query('SELECT * FROM empleados', (err, resultados,con)=>{
       if(err){
          throw err
       }else{
-         res.render('tareas', {mensaje, resultados:resultados});
+         res.render('tareas', {con:con, resultados:resultados});
       }
    })
 })
@@ -68,6 +71,7 @@ router.get('/empleadosPagados',(rep, res)=>{
     });
     
 })
+
 
 
 const crud = require('./controllers/crud');
