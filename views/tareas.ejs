@@ -1,5 +1,27 @@
+<style>
+  .inicio{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 50vh;
+    align-items: center;
+    position: absolute;
+    color: red;
+    width: 750px;
+    margin-left: -1%;
+
+
+  }
+</style>
 <div class="card card-primary col-md-10 offset-md-1">
     <h1 class="card-title">Designar tareas a los empleados</h1>
+      <% if (con) { %>
+        <div class="inicio">
+          <h3>No se puede superar las horas de trabajo de un empleado</h3>
+          <button onclick="comenzar()">Comenzar</button>
+        </div>
+      <% } %>
     <form method="POST" action="/saveTareas" >
 
       <div class="card-body">
@@ -31,12 +53,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  if(con){
-    Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: "Something went wrong!",
-  footer: '<a href="#">Why do I have this issue?</a>'
-});
-  }
+  function comenzar(){
+    document.querySelector(".inicio").style.display="none"
+}
 </script>

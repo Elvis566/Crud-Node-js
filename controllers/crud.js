@@ -19,8 +19,7 @@ exports.tareas = (req, res) =>{
     const nombreTarea = req.body.nombreTarea;
     const horasDispuestas = req.body.horas;
     const idEmpleado= req.body.id_empleado;
-    const con=true;
-    conexion.query('SELECT horastrabajo FROM  empleados WHERE id = ?',[idEmpleado],(error, resultados,con)=>{
+    conexion.query('SELECT horastrabajo FROM  empleados WHERE id = ?',[idEmpleado],(error, resultados)=>{
         if(error){
             console.log(error);
             res.redirect('/');
@@ -28,21 +27,23 @@ exports.tareas = (req, res) =>{
 
         const horasDeTrabajo = resultados[0].horastrabajo;
         if(horasDeTrabajo<horasDispuestas){
-            console.log(con);
-            res.redirect(`/tareas?${con}`);
+           
+            res.redirect(`/tareas`);
         }else{
             conexion.query('INSERT INTO tareas SET?',{tarea:nombreTarea,horasdispuestas:horasDispuestas,id_empleado:idEmpleado}, (error)=>{
                 if(error){
                     console.log(error);
                     return res.redirect('/');
                 }
+                conexion.query(`UPDATE empleados SET horastrabajo = ${horasDeTrabajo-horasDispuestas} WHERE id = ${idEmpleado}`);
+                conexion.query(`UPDATE empleados SET pagado = ${1} WHERE horastrabajo = ${0}`);
                 conexion.query('SELECT * FROM empleados',(error, results)=>{
                     if(error){
                         console.log(error);
                     return res.redirect('/');
                     }
 
-                    res.render(`tareas`, {con, resultados:results})
+                    res.render(`tareas`, {con:false, resultados:results})
                     // res.redirect('/tareas')
                 })
                 

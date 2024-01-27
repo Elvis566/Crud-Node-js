@@ -37,16 +37,12 @@ router.get('/create',(rep, res)=>{
 })
 
 router.get('/tareas',(rep, res)=>{
-    let con =false;
-    let aux=rep.query.con;
-    if(aux){
-        con=true;
-    }
-   conexion.query('SELECT * FROM empleados', (err, resultados,con)=>{
+   const cons = true
+   conexion.query('SELECT * FROM empleados', (err, resultados)=>{
       if(err){
          throw err
       }else{
-         res.render('tareas', {con:con, resultados:resultados});
+         res.render('tareas', {con:cons, resultados:resultados});
       }
    })
 })
